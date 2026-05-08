@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+* {
+    scroll-behavior: smooth;
+}
+  
+body {
+    overflow-x: hidden;
+}
+  
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+  
+@media (max-width: 1400px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Diagonal clipping for red overlay */
+.clip-path-diagonal {
+    clip-path: polygon(0 0, 90% 0, 70% 100%, 0% 100%);
+}
