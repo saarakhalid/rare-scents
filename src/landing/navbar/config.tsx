@@ -4,16 +4,24 @@ export const NAV_ITEMS = [
 		path: "/",
 	},
 	{
+		label: "Shop",
+		path: "/shop",
+	},
+	{
 		label: "About Us",
 		path: "/about-us",
 	},
 	{
-		label: "Explore",
-		path: "/explore",
+		label: "Brands",
+		path: "/brands",
 	},
     {
-		label: "Bucket List",
-		path: "/bucketlist",
+		label: "Contact Us",
+		path: "/contact us",
+	},
+	{
+		label: "Policies",
+		path: "/policies",
 	},
 	
 ];

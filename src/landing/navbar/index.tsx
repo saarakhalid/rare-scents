@@ -5,13 +5,15 @@ import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { NAV_ITEMS } from "./config";
+
 import { cn } from "../../libs/cn";
 
 const AppNavbar = () => {
   const [expandMobileNav, setExpandMobileNav] = useState<boolean>(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const updateExpandMobileNav = () => setExpandMobileNav((prev) => !prev);
+  const updateExpandMobileNav = () =>
+    setExpandMobileNav((prev) => !prev);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -30,27 +32,35 @@ const AppNavbar = () => {
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
     };
   }, [expandMobileNav]);
 
   return (
-    <nav className="py-6 relative z-20">
-      <div className="bg-gradient-to-r from-[#19461A] to-[#486A47] shadow-md rounded-b-[30px] absolute top-0 left-0 right-0 z-20">
+    <nav className="py- relative z-20">
+      <div className="bg-transparent absolute top-0 left-0 right-0 z-20 shadow-md rounded-b-[60px] absolute top-0 left-0 right-0 z-20">
+        
         <div className="container flex justify-between items-center gap-10">
-          <h1
-            className="mb-4 text-3xl font-bold text-white cursor-pointer"
-            onClick={() => (window.location.href = "/")}
-          >
-            DESTINO
-          </h1>
 
-          {/* Desktop Nav */}
-          <section className="mb-4 flex-1 max-w-[1000px] hidden lg:flex items-center gap-10 justify-center">
+          {/* LOGO */}
+          <div className="flex items-center h-20">
+  <img
+    src="logo.png"
+    alt="The Rare Scents"
+    className="w-28 h-28 cursor-pointer object-contain"
+    onClick={() => (window.location.href = "/")}
+  />
+</div>
+
+          {/* DESKTOP NAV */}
+          <section className="mb-2 flex-1 max-w-[1000px] hidden lg:flex items-center justify-center">
             <NavItemsWrapper />
           </section>
 
-          {/* Mobile Hamburger */}
+          {/* MOBILE HAMBURGER */}
           <Button
             className="lg:hidden text-white"
             isIconOnly
@@ -58,7 +68,10 @@ const AppNavbar = () => {
             size="lg"
             onPress={updateExpandMobileNav}
           >
-            <Icon className="text-[32px]" icon="mdi:hamburger-menu" />
+            <Icon
+              className="text-[32px]"
+              icon="mdi:hamburger-menu"
+            />
           </Button>
         </div>
       </div>
@@ -78,17 +91,21 @@ interface NavItemsWrapperProps {
   updateExpandMobileNav?: () => void;
 }
 
-const NavItemsWrapper = ({ updateExpandMobileNav }: NavItemsWrapperProps) => (
-  <div className="flex flex-row lg:items-center gap-12 relative">
+const NavItemsWrapper = ({
+  updateExpandMobileNav,
+}: NavItemsWrapperProps) => (
+  <div className="flex flex-row lg:items-center gap-6 relative">
+
+    {/* NAV LINKS */}
     {NAV_ITEMS.map((item) => (
       <div key={item.path} className="relative">
         <NavLink
           className={({ isActive }) =>
             cn(
-              "text-base transition-colors duration-300 font-semibold text-white",
+              "text-base transition-colors duration-300 font-semibold text-[#534741]",
               isActive
                 ? "underline underline-offset-4"
-                : "hover:text-gray-200"
+                : "hover:text-[#8b6439]"
             )
           }
           to={item.path}
@@ -99,17 +116,39 @@ const NavItemsWrapper = ({ updateExpandMobileNav }: NavItemsWrapperProps) => (
       </div>
     ))}
 
-    {/* Profile Icon */}
-    <NavLink to="/profile">
-      <Button
-        variant="ghost"
-        size="lg"
-        className="p-2"
-        style={{ borderRadius: "50%" }}
-      >
-        <Icon icon="mdi:account-circle" width="48" height="48" className="text-white" />
-      </Button>
-    </NavLink>
+    {/* SEARCH BUTTON */}
+   {/* SEARCH BAR */}
+<div className="flex items-center bg-white/10 border border-[#534741] rounded-full px-4 py-2 w-[220px] backdrop-blur-md">
+  
+  <Icon
+    icon="mdi:magnify"
+    width="22"
+    height="22"
+    className="text-[#534741]"
+  />
+
+  <input
+    type="text"
+    placeholder="Search perfumes..."
+    className="bg-transparent outline-none border-none text-[#534741] placeholder:text-[#534741]text-sm ml-2 w-full"
+  />
+</div>
+
+{/* CART BUTTON */}
+<NavLink to="/cart">
+  <Button
+    isIconOnly
+    variant="light"
+    className="text-[#534741]"
+  >
+    <Icon
+      icon="mdi:cart-outline"
+      width="28"
+      height="28"
+    />
+  </Button>
+</NavLink>
+   
   </div>
 );
 
@@ -124,7 +163,9 @@ const MobileMenu = ({
   updateExpandMobileNav,
   menuRef,
 }: MobileMenuProps) => {
-  const [isMenuHidden, setMenuHidden] = useState(!expandMobileState);
+  const [isMenuHidden, setMenuHidden] = useState(
+    !expandMobileState
+  );
 
   const variants: Variants = {
     expand: {
@@ -137,6 +178,7 @@ const MobileMenu = ({
         opacity: { duration: 0.3 },
       },
     },
+
     minimize: {
       x: "-100%",
       opacity: 0,
@@ -149,7 +191,9 @@ const MobileMenu = ({
     },
   };
 
-  const handleAnimationComplete = (definition: string) => {
+  const handleAnimationComplete = (
+    definition: string
+  ) => {
     if (definition === "minimize") {
       setMenuHidden(true);
     }
@@ -174,6 +218,7 @@ const MobileMenu = ({
       )}
       ref={menuRef}
     >
+      {/* CLOSE BUTTON */}
       <Button
         className="self-end text-white"
         isIconOnly
@@ -181,8 +226,13 @@ const MobileMenu = ({
         size="lg"
         onPress={updateExpandMobileNav}
       >
-        <Icon className="text-[32px]" icon="line-md:close" />
+        <Icon
+          className="text-[32px]"
+          icon="line-md:close"
+        />
       </Button>
+
+      {/* MOBILE LINKS */}
       <div className="flex flex-col gap-8 mt-6 w-full">
         {NAV_ITEMS.map((item) => (
           <div key={item.path}>
@@ -202,9 +252,38 @@ const MobileMenu = ({
             </NavLink>
           </div>
         ))}
+
+        {/* MOBILE SEARCH */}
+        <Button
+          className="text-white"
+          variant="light"
+          startContent={
+            <Icon icon="mdi:magnify" width="24" />
+          }
+        >
+          Search
+        </Button>
+
+        {/* MOBILE CART */}
+        <NavLink to="/cart" className="w-full">
+          <Button
+            className="bg-white text-[#19461A] px-8 py-2 text-lg justify-center rounded-lg mt-2"
+            size="lg"
+            startContent={
+              <Icon
+                icon="mdi:cart-outline"
+                width="24"
+              />
+            }
+          >
+            Cart
+          </Button>
+        </NavLink>
+
+        {/* CONTACT BUTTON */}
         <NavLink to="/contact-us" className="w-full">
           <Button
-            className="bg-white text-[#0F2F8F] px-8 py-2 text-lg justify-center rounded-lg mt-4"
+            className="bg-white text-[#19461A] px-8 py-2 text-lg justify-center rounded-lg mt-2"
             size="lg"
           >
             Contact Us

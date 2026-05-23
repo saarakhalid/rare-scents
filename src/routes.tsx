@@ -1,43 +1,39 @@
-// import LandingLayout from "@layouts/landing";
 import { useRoutes } from "react-router-dom";
 import LandingLayout from "./landing/layout";
-
 import ViewPage from "./pages/HOME/view";
-import About from "./pages/about";
+import NewIn from "./pages/product/newin/new";
+import View from "./pages/product/newin/view";
 
-// import ViewPage from "./pages/herosection/view";
-
-// import MissionVision from "./pages/mission";
-
-// import AboutPage from "./pages/About";
-// import GeneralInquiry from "./pages/contact";
-
-
-
-// import Home from "@pages/home";
 
 const Router = () => {
-	const routes = useRoutes([
-		{
-			path: "/",
-			element: <LandingLayout />,
-			children: [
-				 { index: true, element: <ViewPage /> },
-				{ path: "about-us", element: <About /> },
-				// { path: "mission & vision", element: < MissionVision/> },
-				// { path: "contact-us", element: < GeneralInquiry/> },
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: <LandingLayout />,
+      children: [
+        // HOMEPAGE
+        {
+          index: true,
+          element: <ViewPage />,
+        },
 
+        // ONLY PAGE WITH PATH
+        {
+          
+          element: <NewIn />,
+        },
+        {
+          path: "view",
+          element: <View />,
+        }
+      ],
+    },
 
-				
+    // NOT FOUND
+  
+  ]);
 
-				
-			],
-		},
-		// Wildcard route for 404 Not Found
-		// { path: "*", element: <NotFoundPage /> },
-	]);
-
-	return routes;
+  return routes;
 };
 
 export default Router;

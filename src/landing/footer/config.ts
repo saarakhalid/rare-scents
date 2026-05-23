@@ -1,17 +1,12 @@
+// config/index.ts
+
 export const SOCIALS = [
 	{
-		icon: "proicons:facebook",
-		path: "#",
+	  icon: "ri:instagram-line",
+	  path: "https://instagram.com",
 	},
 	{
-		icon: "ri:instagram-line",
-		path: "#",
+	  icon: "ic:baseline-tiktok",
+	  path: "https://tiktok.com",
 	},
-	{
-		icon: "ri:twitter-x-line",
-		path: "#",
-	},
-	
-	
-
-];
+  ];

@@ -1,15 +1,24 @@
 
-import Banner from "./banner";
+import Aboutus from "../about";
+import Collections from "../collection";
+import Products from "../product";
+import NewIn from "../product/newin/new";
+import Testimonials from "../reviews";
 import Home from "./home";
-import Gallery from "./sections";
+import QuoteSection from "./quote";
 import HowItWorks from "./works";
 
 const ViewPage = () => (
     <>
       <Home />
-      <Gallery />
+      <QuoteSection/>
+      <NewIn/>
+      <Products/>
       <HowItWorks/>
-      <Banner/>
+      <Collections/>
+      <Aboutus/>
+      <Testimonials/>
+      
     </>
   );
    
